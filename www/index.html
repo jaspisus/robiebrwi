@@ -1,1 +1,219 @@
-<h1>Hello World</h1>
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>robię brwi · Wiktoria Jackowska</title>
+    <meta
+      name="description"
+      content="robię brwi – Wiktoria Jackowska. Laminacja, farbka, geometria i regulacja brwi."
+    />
+    <meta name="theme-color" content="#403632" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #403632;
+        --fg: #d3d0cb;
+        --fg-muted: rgba(211, 208, 203, 0.55);
+        --line: rgba(211, 208, 203, 0.35);
+        --hover: rgba(211, 208, 203, 0.08);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        min-height: 100vh;
+        min-height: 100dvh;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: "Cormorant Garamond", Garamond, "Times New Roman", serif;
+        -webkit-font-smoothing: antialiased;
+        display: flex;
+        justify-content: center;
+        padding: max(16px, env(safe-area-inset-top)) 16px
+          max(16px, env(safe-area-inset-bottom));
+      }
+
+      .page {
+        width: 100%;
+        max-width: 440px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 48px;
+        padding: 48px 0;
+      }
+
+      /* Logo */
+      .logo {
+        align-self: center;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        line-height: 1;
+      }
+
+      .logo__title {
+        margin: 0;
+        font-weight: 400;
+        font-size: clamp(3.5rem, 18vw, 5.5rem);
+        letter-spacing: -0.01em;
+      }
+
+      .logo__subtitle {
+        display: flex;
+        justify-content: space-between;
+        gap: 1em;
+        margin-top: -0.45em;
+        font-weight: 400;
+        font-size: clamp(0.95rem, 4.6vw, 1.4rem);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      /* Links */
+      .links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .link {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        min-height: 60px;
+        padding: 12px 22px;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        color: var(--fg);
+        text-decoration: none;
+        font-size: 1.5rem;
+        font-weight: 500;
+        transition:
+          background-color 0.2s ease,
+          border-color 0.2s ease;
+      }
+
+      .link:hover {
+        background: var(--hover);
+        border-color: var(--fg-muted);
+      }
+
+      .link:focus-visible {
+        outline: 2px solid var(--fg);
+        outline-offset: 3px;
+      }
+
+      .link svg {
+        flex: none;
+        width: 28px;
+        height: 28px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .divider {
+        align-self: center;
+        width: 1px;
+        height: 40px;
+        background: var(--line);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="logo">
+        <h1 class="logo__title">robię brwi</h1>
+        <div class="logo__subtitle">
+          <span>Wiktoria</span>
+          <span>Jackowska</span>
+        </div>
+      </header>
+
+      <nav aria-label="Kontakt">
+        <ul class="links">
+          <li>
+            <a
+              class="link"
+              href="https://www.instagram.com/robie.brwi/"
+              target="_blank"
+              rel="noopener"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+              </svg>
+              <span>Instagram – robie.brwi</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="link"
+              href="https://booksy.com/pl-pl/"
+              target="_blank"
+              rel="noopener"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="16" rx="2" />
+                <path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4" />
+              </svg>
+              <span>Grafik – Booksy</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="link"
+              href="https://maps.app.goo.gl/JUpZXoUUeorfxAKU8"
+              target="_blank"
+              rel="noopener"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"
+                />
+                <circle cx="12" cy="9.5" r="2.5" />
+              </svg>
+              <span>Dojazd – Google Maps</span>
+            </a>
+          </li>
+          <li>
+            <a class="link" href="mailto:kontakt@robiebrwi.pl">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <path d="M3.5 6l8.5 7 8.5-7" />
+              </svg>
+              <span>kontakt@robiebrwi.pl</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </main>
+  </body>
+</html>
