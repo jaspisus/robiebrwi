@@ -173,8 +173,8 @@
 
       <h1 class="page__title">Jeszcze jeden krok do opinii</h1>
       <p class="page__text">
-        Instagram otworzył tę stronę we własnej przeglądarce, w której nie
-        jesteś zalogowana do Google.
+        Stąd nie da się dodać opinii. Otwórz stronę w przeglądarce albo
+        w Mapach Google – zajmie to tylko chwilę.
       </p>
       <ol class="steps">
         <li>Kliknij <b>⋯</b> w prawym górnym rogu.</li>
@@ -182,9 +182,13 @@
       </ol>
 
       <div class="actions">
-        <button class="link" id="retry" type="button">
-          Spróbuj otworzyć automatycznie
-        </button>
+        <a
+          class="link"
+          href="https://maps.app.goo.gl/G632nkDwSTTdmSqf6"
+          target="_blank"
+          rel="noopener"
+          >Otwórz w Mapach Google</a
+        >
         <button class="link" id="copy" type="button">Skopiuj link</button>
       </div>
     </main>
@@ -228,8 +232,6 @@
         document.getElementById("redirecting").hidden = true;
         document.getElementById("fallback").hidden = false;
         escapeInApp();
-
-        document.getElementById("retry").addEventListener("click", escapeInApp);
 
         var copyBtn = document.getElementById("copy");
         copyBtn.addEventListener("click", function () {
