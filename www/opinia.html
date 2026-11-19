@@ -18,10 +18,7 @@
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="800" />
     <meta property="og:image:height" content="460" />
-    <meta
-      property="og:image:alt"
-      content="robię brwi – Wiktoria Jackowska"
-    />
+    <meta property="og:image:alt" content="robię brwi – Wiktoria Jackowska" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -76,6 +73,47 @@
         line-height: 1.4;
       }
 
+      /* Leaves room for the absolutely positioned logo above the content */
+      .page--logo {
+        padding-top: 88px;
+      }
+
+      .logo {
+        position: absolute;
+        top: calc(env(safe-area-inset-top, 0px) + 14px);
+        left: 50%;
+        transform: translateX(-50%);
+        display: inline-flex;
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        line-height: 1;
+        white-space: nowrap;
+        color: inherit;
+        text-decoration: none;
+        border-radius: 4px;
+      }
+
+      .logo:focus-visible {
+        outline: 2px solid var(--fg);
+        outline-offset: 6px;
+      }
+
+      .logo__title {
+        font-size: 2rem;
+        letter-spacing: -0.01em;
+      }
+
+      .logo__subtitle {
+        display: flex;
+        justify-content: space-between;
+        gap: 1em;
+        margin-top: -0.3em;
+        font-size: 0.55rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
       .page__title {
         margin: 0;
         font-weight: 400;
@@ -100,15 +138,88 @@
         margin-top: 6px;
       }
 
+      .steps__icon {
+        width: 1.15em;
+        height: 1.15em;
+        vertical-align: -0.2em;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.5;
+      }
+
+      .steps__dot {
+        fill: currentColor;
+        stroke: none;
+      }
+
       .steps b {
         font-weight: 500;
         white-space: nowrap;
       }
 
+      .divider {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        /* Pull closer to the steps and buttons than the page's 32px gap */
+        margin: -14px 0;
+        color: var(--fg-muted);
+        font-size: 1.15rem;
+        letter-spacing: 0.08em;
+      }
+
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--line);
+      }
+
       .actions {
         display: flex;
         flex-direction: column;
+        align-items: center;
         gap: 14px;
+      }
+
+      .text-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 6px 4px;
+        border-radius: 4px;
+        color: var(--fg);
+        font-size: 1.3rem;
+        text-decoration: underline;
+        text-decoration-color: var(--line);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.25em;
+        transition: text-decoration-color 0.2s ease;
+      }
+
+      .text-link strong {
+        font-weight: 500;
+      }
+
+      .text-link svg {
+        flex: none;
+        width: 0.8em;
+        height: 0.8em;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .text-link:hover {
+        text-decoration-color: var(--fg);
+      }
+
+      .text-link:focus-visible {
+        outline: 2px solid var(--fg);
+        outline-offset: 3px;
       }
 
       .link {
@@ -154,7 +265,7 @@
         stroke-width: 1.5;
         stroke-linecap: round;
         stroke-linejoin: round;
-        animation: nudge 1.4s ease-in-out 3;
+        animation: nudge 1.4s ease-in-out infinite;
       }
 
       @keyframes nudge {
@@ -179,31 +290,58 @@
       <p class="page__text">Otwieram stronę opinii Google…</p>
     </main>
 
-    <main class="page" id="fallback" hidden>
+    <main class="page page--logo" id="fallback" hidden>
+      <a class="logo" href="./" aria-label="robię brwi – Wiktoria Jackowska">
+        <div class="logo__title">robię brwi</div>
+        <div class="logo__subtitle">
+          <span>Wiktoria</span>
+          <span>Jackowska</span>
+        </div>
+      </a>
+
       <svg class="pointer" viewBox="0 0 64 64" aria-hidden="true">
-        <path d="M10 56 C 18 30, 34 18, 54 10" />
-        <path d="M38 8 L54 10 L50 26" />
+        <path d="M8 54 C 34 46, 46 30, 54 10" />
+        <path d="M58.2 25.4 L54 10 L40.3 18.3" />
       </svg>
 
       <h1 class="page__title">Jeszcze jeden krok do opinii</h1>
       <p class="page__text">
-        Stąd nie da się dodać opinii. Otwórz stronę w przeglądarce albo
-        w Mapach Google – zajmie to tylko chwilę.
+        Stąd nie da się dodać opinii. Otwórz stronę w przeglądarce albo w Mapach
+        Google – zajmie to tylko chwilę.
       </p>
       <ol class="steps">
-        <li>Kliknij <b>⋯</b> w prawym górnym rogu.</li>
+        <li>
+          Kliknij
+          <svg class="steps__icon" viewBox="0 0 24 24" role="img" aria-label="⋯">
+            <circle cx="12" cy="12" r="10.5" />
+            <circle class="steps__dot" cx="7.5" cy="12" r="1.3" />
+            <circle class="steps__dot" cx="12" cy="12" r="1.3" />
+            <circle class="steps__dot" cx="16.5" cy="12" r="1.3" />
+          </svg>
+          w prawym górnym rogu.
+        </li>
         <li>Wybierz <b>„Otwórz w przeglądarce”</b>.</li>
       </ol>
 
+      <p class="divider">lub</p>
+
       <div class="actions">
+        <button class="link" id="copy" type="button">Skopiuj link</button>
         <a
-          class="link"
+          class="text-link"
           href="https://maps.app.goo.gl/G632nkDwSTTdmSqf6"
           target="_blank"
           rel="noopener"
-          >Otwórz w Mapach Google</a
         >
-        <button class="link" id="copy" type="button">Skopiuj link</button>
+          <span><strong>robię brwi</strong> w Mapach Google</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14 4h6v6" />
+            <path d="M20 4l-9 9" />
+            <path
+              d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+            />
+          </svg>
+        </a>
       </div>
     </main>
 
