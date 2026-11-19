@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="robots" content="noindex" />
+    <title>Zostaw opinię · robię brwi</title>
+    <meta name="theme-color" content="#403632" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #403632;
+        --fg: #d3d0cb;
+        --fg-muted: rgba(211, 208, 203, 0.55);
+        --line: rgba(211, 208, 203, 0.35);
+        --hover: rgba(211, 208, 203, 0.08);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        min-height: 100vh;
+        min-height: 100dvh;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: "Cormorant Garamond", Garamond, "Times New Roman", serif;
+        -webkit-font-smoothing: antialiased;
+        display: flex;
+        justify-content: center;
+        padding: max(16px, env(safe-area-inset-top)) 16px
+          max(16px, env(safe-area-inset-bottom));
+      }
+
+      .page {
+        width: 100%;
+        max-width: 440px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 32px;
+        padding: 48px 0;
+        font-size: 1.35rem;
+        line-height: 1.4;
+      }
+
+      .page__title {
+        margin: 0;
+        font-weight: 400;
+        font-size: clamp(2.4rem, 11vw, 3.2rem);
+        line-height: 1.05;
+        letter-spacing: -0.01em;
+        text-align: center;
+      }
+
+      .page__text {
+        margin: 0;
+        color: var(--fg-muted);
+        text-align: center;
+      }
+
+      .steps {
+        margin: 0;
+        padding-left: 1.4em;
+      }
+
+      .steps li + li {
+        margin-top: 6px;
+      }
+
+      .steps b {
+        font-weight: 500;
+        white-space: nowrap;
+      }
+
+      .actions {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 60px;
+        padding: 12px 22px;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        background: transparent;
+        color: var(--fg);
+        font: inherit;
+        font-size: 1.5rem;
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+        transition:
+          background-color 0.2s ease,
+          border-color 0.2s ease;
+      }
+
+      .link:hover {
+        background: var(--hover);
+        border-color: var(--fg-muted);
+      }
+
+      .link:focus-visible {
+        outline: 2px solid var(--fg);
+        outline-offset: 3px;
+      }
+
+      /* Points at the ⋯ menu in the top-right corner of Instagram's in-app browser */
+      .pointer {
+        position: fixed;
+        top: calc(env(safe-area-inset-top, 0px) + 6px);
+        right: 14px;
+        width: 56px;
+        height: 56px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        animation: nudge 1.4s ease-in-out 3;
+      }
+
+      @keyframes nudge {
+        50% {
+          transform: translate(4px, -4px);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .pointer {
+          animation: none;
+        }
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page" id="redirecting">
+      <p class="page__text">Otwieram stronę opinii Google…</p>
+    </main>
+
+    <main class="page" id="fallback" hidden>
+      <svg class="pointer" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M10 56 C 18 30, 34 18, 54 10" />
+        <path d="M38 8 L54 10 L50 26" />
+      </svg>
+
+      <h1 class="page__title">Jeszcze jeden krok do opinii</h1>
+      <p class="page__text">
+        Instagram otworzył tę stronę we własnej przeglądarce, w której nie
+        jesteś zalogowana do Google.
+      </p>
+      <ol class="steps">
+        <li>Kliknij <b>⋯</b> w prawym górnym rogu.</li>
+        <li>Wybierz <b>„Otwórz w przeglądarce”</b>.</li>
+      </ol>
+
+      <div class="actions">
+        <button class="link" id="retry" type="button">
+          Spróbuj otworzyć automatycznie
+        </button>
+        <button class="link" id="copy" type="button">Skopiuj link</button>
+      </div>
+    </main>
+
+    <noscript>
+      <main class="page">
+        <a class="link" href="https://g.page/r/Cefh2Kt4gkRBECE/review"
+          >Zostaw opinię w Google</a
+        >
+      </main>
+    </noscript>
+
+    <script>
+      (function () {
+        // Google review link; must start with https://
+        var TARGET = "https://g.page/r/Cefh2Kt4gkRBECE/review";
+
+        var ua = navigator.userAgent || "";
+        var inApp = /Instagram|FBAN|FBAV|FB_IAB|Messenger/i.test(ua);
+        var isIOS = /iPhone|iPad|iPod/i.test(ua);
+        var isAndroid = /Android/i.test(ua);
+        var bare = TARGET.replace(/^https:\/\//, "");
+
+        if (!inApp) {
+          location.replace(TARGET);
+          return;
+        }
+
+        function escapeInApp() {
+          if (isIOS) {
+            // iOS 17+ hands x-safari-https:// links to Safari
+            location.href = "x-safari-https://" + bare;
+          } else if (isAndroid) {
+            location.href =
+              "intent://" +
+              bare +
+              "#Intent;scheme=https;action=android.intent.action.VIEW;end";
+          }
+        }
+
+        document.getElementById("redirecting").hidden = true;
+        document.getElementById("fallback").hidden = false;
+        escapeInApp();
+
+        document.getElementById("retry").addEventListener("click", escapeInApp);
+
+        var copyBtn = document.getElementById("copy");
+        copyBtn.addEventListener("click", function () {
+          function done() {
+            copyBtn.textContent = "Skopiowano link";
+          }
+          function legacy() {
+            var t = document.createElement("textarea");
+            t.value = TARGET;
+            t.setAttribute("readonly", "");
+            t.style.position = "fixed";
+            t.style.opacity = "0";
+            document.body.appendChild(t);
+            t.select();
+            try {
+              document.execCommand("copy");
+              done();
+            } catch (e) {}
+            document.body.removeChild(t);
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(TARGET).then(done, legacy);
+          } else {
+            legacy();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
